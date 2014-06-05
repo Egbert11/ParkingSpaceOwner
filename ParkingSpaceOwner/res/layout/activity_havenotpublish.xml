@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/displayNotPublic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dip"
+        android:editable="false"
+        android:ems="10"
+        android:gravity="center_vertical|center_horizontal"
+        android:inputType="textMultiLine"
+        android:maxLength="@android:integer/config_shortAnimTime"
+        android:singleLine="true"
+        android:text="你还没有发布车位哦！赶紧去发布一个吧=。=" >
+
+        <requestFocus />
+    </TextView>
+
+    <Button
+        android:id="@+id/btnPublic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/displayNotPublic"
+        android:layout_centerHorizontal="true"
+        android:text="去发布" />
+
+</RelativeLayout>

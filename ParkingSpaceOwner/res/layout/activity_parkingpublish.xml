@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#8DEEEE">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="30sp"
+        android:text="发布车位"
+        android:textColor="#FFF"
+        android:textSize="30sp" />
+
+    <RelativeLayout
+        android:id="@+id/form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="选取"
+            android:textColorLink="#FFF" />
+        
+        <TextView
+            android:id="@+id/position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/select"
+            android:layout_alignBottom="@+id/select"
+            android:layout_toRightOf="@+id/TextView01"
+            android:text="暂无信息"
+            android:textColor="#8F8F8F" 
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/position"
+            android:layout_alignBottom="@+id/position"
+            android:layout_alignParentLeft="true"
+            android:text=" 车位位置："
+            android:textColor="#FFF"
+            android:textSize="23sp" />
+
+        <EditText
+            android:id="@+id/number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/position"
+            android:layout_toRightOf="@+id/TextView01"
+            android:hint="请填写你的车位号"
+            android:inputType="number"
+            android:textColor="#000"
+            android:textColorLink="#FFF" />
+
+        <TextView
+            android:id="@+id/TextView02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/number"
+            android:layout_alignBottom="@+id/number"
+            android:layout_alignParentLeft="true"
+            android:text=" 车位号码："
+            android:textColor="#FFF"
+            android:textSize="23sp" />
+
+        <EditText
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/number"
+            android:hint="每小时车位租金"
+            android:inputType="number"
+            android:layout_toRightOf="@+id/TextView01"
+            android:textColor="#000"
+            android:textColorLink="#FFF" />
+
+        <TextView
+            android:id="@+id/TextView03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/price"
+            android:layout_alignBottom="@+id/price"
+            android:layout_alignParentLeft="true"
+            android:text=" 车位租金："
+            android:textColor="#FFF"
+            android:textSize="23sp" />
+
+        <EditText
+            android:id="@+id/startTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/price"
+            android:hint="车位开放起始时间"
+            android:inputType="time"
+            android:layout_toRightOf="@+id/TextView01"
+            android:textColor="#000"
+            android:textColorLink="#FFF" />
+
+        <TextView
+            android:id="@+id/TextView04"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/startTime"
+            android:layout_alignBottom="@+id/startTime"
+            android:layout_alignParentLeft="true"
+            android:text=" 开始时间："
+            android:textColor="#FFF"
+            android:textSize="23sp" />
+        
+        <EditText
+            android:id="@+id/endTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/startTime"
+            android:hint="车位开放结束时间"
+            android:inputType="time"
+            android:layout_toRightOf="@+id/TextView01"
+            android:textColor="#000"
+            android:textColorLink="#FFF" />
+
+        <TextView
+            android:id="@+id/TextView05"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/endTime"
+            android:layout_alignBottom="@+id/endTime"
+            android:layout_alignParentLeft="true"
+            android:text=" 结束时间："
+            android:textColor="#FFF"
+            android:textSize="23sp" />
+        <Button
+            android:id="@+id/publish"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/endTime"
+            android:layout_centerHorizontal="true"
+            android:text="发布车位"
+            android:textColor="#000"
+            android:textSize="23dp" />
+        
+        <Button
+            android:id="@+id/manage"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/publish"
+            android:layout_centerHorizontal="true"
+            android:text="车位管理"
+            android:textColor="#000"
+            android:textSize="23dp" />
+
+    </RelativeLayout>
+
+    
+
+    </LinearLayout>
