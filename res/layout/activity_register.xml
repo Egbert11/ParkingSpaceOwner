@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/login_bg"
+    android:orientation="vertical" >
+
+    <include
+        layout="@layout/title_home"
+        android:focusable="true" />
+    <!--
+         <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="30sp"
+        android:text="用户注册"
+        android:textColor="#FFF"
+        android:textSize="30sp" />
+    -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/note_reg" />
+"
+
+    <RelativeLayout
+        android:id="@+id/form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/Phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/TextView01"
+            android:hint="请输入本机的手机号"
+            android:inputType="phone"
+            android:textColor="#000"
+            android:textColorLink="#FFF" />
+
+        <EditText
+            android:id="@+id/user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/Phone"
+            android:layout_toRightOf="@+id/TextView01"
+            android:hint="请填写你的真实姓名"
+            android:inputType="text"
+            android:textColor="#000"
+            android:textColorLink="#FFF" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/user"
+            android:layout_toRightOf="@+id/TextView01"
+            android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            android:hint="密码长度为6-15个字符"
+            android:password="true"
+            android:textColor="#000"
+            android:textColorLink="#FFF" />
+
+        <ImageView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/user"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/ico_phone" />
+
+        <ImageView
+            android:id="@+id/TextView02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/user"
+            android:layout_alignRight="@+id/TextView03"
+            android:layout_below="@+id/Phone"
+            android:src="@drawable/ico_name" />
+
+        <ImageView
+            android:id="@+id/TextView03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/password"
+            android:layout_alignRight="@+id/TextView01"
+            android:layout_below="@+id/TextView02"
+            android:src="@drawable/ico_password" />
+    </RelativeLayout>
+
+    <!--
+         <Button
+            android:id="@+id/register"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/password"
+            android:layout_toRightOf="@+id/TextView01"
+            android:text="注册"
+            android:textColor="#000"
+            android:textSize="26dp" />
+    -->
+
+    <TextView
+        android:id="@+id/link_law"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="@string/link_lower" />
+
+    <Button
+        android:id="@+id/register"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/bg_btn_up"
+        android:text="注册" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:src="@drawable/body_bottom" />
+
+</LinearLayout>

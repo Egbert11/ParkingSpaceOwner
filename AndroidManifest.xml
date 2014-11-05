@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zhcs.regAndLog"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="16" />
+
+    <application
+        android:name="com.zhcs.parkingspaceadmin.DemoApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/easyparking"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" 
+		android:screenOrientation="sensor"  
+        android:configChanges="orientation|keyboardHidden"> 
+        <meta-data android:name="com.baidu.lbsapi.API_KEY" 
+            android:value="qdmKBCzq5u8caNvAdNyi0UTP">
+		</meta-data>
+        
+        <activity
+            android:name="com.zhcs.regAndLog.Login"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.zhcs.regAndLog.Register"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.zhcs.parkingspaceadmin.HaveNotPublish"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.zhcs.parkingspaceadmin.ParkingPublish"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.zhcs.parkingspaceadmin.ModifySpace"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.zhcs.parkingspaceadmin.SoftwareInformation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.zhcs.parkingspaceadmin.TermOfServices"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.zhcs.parkingspaceadmin.BaiduMapForLatLng"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="点击设置车位位置"
+            android:screenOrientation="sensor" />
+        <activity
+            android:name="com.zhcs.parkingspaceadmin.SpaceManagement"
+            android:label="车位管理"/>
+        <activity
+            android:name="com.zhcs.parkingspaceadmin.ReceiveBookMessage"
+            android:label="预订车位消息"/>
+        <service android:name="com.avos.avoscloud.PushService"/>
+        <receiver android:name="com.avos.avoscloud.AVBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+        <!-- <receiver android:name="com.zhcs.parkingspaceadmin.MyCustomReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="com.zhcs.driver" />
+            </intent-filter> 
+        </receiver>-->
+    </application>
+<!--使用网络功能所需权限  -->
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE">
+</uses-permission>
+<uses-permission android:name="android.permission.INTERNET">
+</uses-permission>
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE">
+</uses-permission>
+<uses-permission android:name="android.permission.RESTART_PACKAGES" />
+<uses-permission android:name="android.permission.CHANGE_WIFI_STATE">
+</uses-permission>
+<!-- SDK离线地图和cache功能需要读写外部存储器 -->
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE">
+</uses-permission>
+<uses-permission android:name="android.permission.WRITE_SETTINGS">
+</uses-permission>
+<!-- 获取设置信息和详情页直接拨打电话需要以下权限  -->
+<uses-permission android:name="android.permission.READ_PHONE_STATE">
+</uses-permission>
+<uses-permission android:name="android.permission.CALL_PHONE">
+</uses-permission>
+<!-- 使用定位功能所需权限,demo已集成百度定位SDK,不使用定位功能可去掉以下6项 -->
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION">
+</uses-permission>
+<permission android:name="android.permission.BAIDU_LOCATION_SERVICE">
+</permission>
+<uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE">
+</uses-permission>
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION">
+</uses-permission>
+<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION">
+</uses-permission>
+<uses-permission android:name="android.permission.ACCESS_GPS"/>                  
+    
+
+<supports-screens android:largeScreens="true"
+            android:normalScreens="true"
+            android:smallScreens="true"
+            android:resizeable="true"
+            android:anyDensity="true"/>
+
+</manifest>

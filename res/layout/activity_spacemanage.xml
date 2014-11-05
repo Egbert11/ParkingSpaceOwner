@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_pubspace"
+    android:orientation="vertical" >
+   <!--  <RelativeLayout 
+        android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal" >
+    <TextView 
+        android:id="@+id/menu"
+        android:layout_width="30dp"
+        android:layout_height="60dp"
+        android:text="《"
+        android:textColor="#FFF"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:background="#0089d2"/>
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:text="车位管理"
+        android:textColor="#FFF"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:background="#0089d2"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/menu"/>
+    </RelativeLayout> -->
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:divider="#00000000"
+		android:dividerHeight="18dp"
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true">
+    </ListView>
+        
+
+</LinearLayout>
