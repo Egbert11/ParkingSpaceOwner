@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.avos.avoscloud.AVObject;
+/**
+ * 
+ * @author gzs3050
+ * 记录小区列表以及业主发布车位时的小区序号
+ */
 public class Community {
 	//小区列表
 	public static ArrayList<CommunityInfoBean> list = new ArrayList<CommunityInfoBean>();
-	//记录当前车位主所选择的小区序号
 	public static int index = -1;
 
 	public static ArrayList<CommunityInfoBean> getList() {

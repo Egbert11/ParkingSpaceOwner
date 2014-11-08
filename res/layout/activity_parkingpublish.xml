@@ -187,11 +187,38 @@
             android:layout_marginLeft="10dp"
             android:text=" 结束时间："
             android:textColor="#FFF" />
+        
+        <Button
+            android:id="@+id/sharedate"
+            android:layout_width="175dp"
+            android:layout_height="27dp"
+            android:textSize="14sp"
+            android:background="#55BFE7"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="13dp"
+            android:layout_below="@+id/endTime"
+            android:text="选择"
+            android:layout_toRightOf="@+id/TextView02"
+            android:textColor="#FFF"
+            android:textColorLink="#FFF" />
+        
+        <TextView
+            android:id="@+id/TextView07"
+            android:layout_width="110dp"
+            android:layout_height="27dp"
+            android:textSize="17sp"
+            android:gravity="center" 
+            android:background="#55BFE7"
+            android:layout_alignBaseline="@+id/sharedate"
+            android:layout_alignBottom="@+id/sharedate"
+            android:layout_marginLeft="10dp"
+            android:text=" 共享日期："
+            android:textColor="#FFF" />
         <Button
             android:id="@+id/publish"
             android:layout_width="310dp"
             android:layout_height="50dp"
-            android:layout_below="@+id/endTime"
+            android:layout_below="@+id/sharedate"
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
             android:text="发布"

@@ -1,6 +1,11 @@
 package com.zhcs.parkingspaceadmin;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import org.json.JSONArray;
+
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.SaveCallback;
@@ -10,9 +15,11 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.zhcs.ownerBean.Community;
 import com.zhcs.ownerBean.CommunityInfoBean;
 import com.zhcs.ownerBean.OwnerInfo;
+import com.zhcs.ownerBean.ParkingShareDate;
 import com.zhcs.regAndLog.R;
 
 import android.text.Html;
+import android.util.Log;
 import android.view.View.OnClickListener;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +36,8 @@ import android.widget.Toast;
 public class ParkingPublish extends SlidingFragmentActivity{
 	//选取按钮
 	private Button select;
+	//共享日期
+	private Button shareDate;
 	//发布车位按钮
 	private Button publishSpace;
 	//车位所在小区经纬度
@@ -62,6 +71,7 @@ public class ParkingPublish extends SlidingFragmentActivity{
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		//获得实例对象
 		select = (Button)findViewById(R.id.select);
+		shareDate = (Button)findViewById(R.id.sharedate);
 		publishSpace = (Button)findViewById(R.id.publish);
 		pos = (TextView)findViewById(R.id.position);
 		num = (EditText)findViewById(R.id.number);
@@ -87,6 +97,16 @@ public class ParkingPublish extends SlidingFragmentActivity{
 			}
 		});
 		
+		shareDate.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(ParkingPublish.this, ShareDateSelect.class);
+				startActivity(intent);
+			}
+		});
+		
 		//发布车位
 		publishSpace.setOnClickListener(new OnClickListener() {
 			
@@ -96,11 +116,12 @@ public class ParkingPublish extends SlidingFragmentActivity{
 				if(!isValid())
 					return;
 				else{
-//					PublishSpaceClass pub = new PublishSpaceClass();
-//					new Thread(pub, "发布车位线程").start();
+					//车位共享日期
+					List<Calendar> shareDate = ParkingShareDate.getShareDate();
 					ArrayList<CommunityInfoBean> list = Community.getList();
 					int index = Community.getIndex();
 					AVObject publish = new AVObject("SpaceInfo");
+					
 					publish.put("ownerid", OwnerInfo.getId());
 					publish.put("communityid", list.get(index).getCommunityId());
 					publish.put("lat", list.get(index).getLatitude());
@@ -111,6 +132,7 @@ public class ParkingPublish extends SlidingFragmentActivity{
 					publish.put("start", Integer.parseInt(start.getText().toString()));
 					publish.put("end", Integer.parseInt(end.getText().toString()));
 					publish.put("state", 0);
+					publish.addAll("shareDate", shareDate);
 					publish.saveInBackground(new SaveCallback() {
 						@Override
 						public void done(AVException arg0) {
@@ -120,6 +142,7 @@ public class ParkingPublish extends SlidingFragmentActivity{
 								GetPublicSpaceData.getSpaceInfo(OwnerInfo.getId());
 					        } else {
 					        	Toast.makeText(ParkingPublish.this,"发布车位失败", Toast.LENGTH_SHORT).show();
+					        	Log.e("publish", arg0.getMessage());
 						}
 					}
 		        });

@@ -8,6 +8,11 @@ import android.content.Intent;
 
 import com.avos.avoscloud.AVObject;
 import com.zhcs.parkingspaceadmin.SpaceManagement;
+/**
+ * 
+ * @author huangjiaming
+ * 记录业主的基本信息，包括id, phone： 电话, list: 已发布车位信息
+ */
 public class OwnerInfo {
 	private static String id;
 	private static String phone;

@@ -109,7 +109,7 @@ public class BaiduMapForLatLng extends Activity{
         	Bundle b = intent.getExtras();
         	p = new GeoPoint(b.getInt("y"), b.getInt("x"));
         }else{
-        	p =new GeoPoint((int)(39.915507* 1E6),(int)(116.408042* 1E6));
+        	p =new GeoPoint((int)(23.078304* 1E6),(int)(113.402161* 1E6));
         }
         
         mMapController.setCenter(p);

@@ -1,5 +1,13 @@
 package com.zhcs.ownerBean;
 
+/**
+ * @author gzs3050
+ * 保存小区的各类信息：
+ * communityId: 小区id
+ * address: 小区地址
+ * latitude: 小区纬度
+ * longitude： 小区经度
+ */
 public class CommunityInfoBean {
 	private String communityId;
 	private String address;
