@@ -2,6 +2,7 @@ package com.zhcs.parkingspaceadmin;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -19,11 +20,16 @@ import com.zhcs.ownerBean.ParkingShareDate;
 import com.zhcs.regAndLog.R;
 
 import android.text.Html;
+import android.text.InputType;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View.OnClickListener;
 import android.view.MenuItem;
 import android.view.View;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -31,9 +37,10 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
-public class ParkingPublish extends SlidingFragmentActivity{
+public class ParkingPublish extends SlidingFragmentActivity implements View.OnTouchListener{
 	//选取按钮
 	private Button select;
 	//共享日期
@@ -54,6 +61,8 @@ public class ParkingPublish extends SlidingFragmentActivity{
 	private EditText end;
 	//车位所在小区序号
 	private int index;
+	private Date startDate = new Date();
+	private Date endDate = new Date();
 	private CanvasTransformer mTransformer;
 	
 	@Override
@@ -80,6 +89,9 @@ public class ParkingPublish extends SlidingFragmentActivity{
 		start = (EditText)findViewById(R.id.startTime);
 		end = (EditText)findViewById(R.id.endTime);
 		
+		//设置监听事件
+		start.setOnTouchListener(this); 
+        end.setOnTouchListener(this); 
 		
 		if(Community.getIndex() != -1) {
 			index = Community.getIndex();
@@ -118,6 +130,7 @@ public class ParkingPublish extends SlidingFragmentActivity{
 				else{
 					//车位共享日期
 					List<Calendar> shareDate = ParkingShareDate.getShareDate();
+					List<Calendar> nullShareDate = new ArrayList<Calendar>();
 					ArrayList<CommunityInfoBean> list = Community.getList();
 					int index = Community.getIndex();
 					AVObject publish = new AVObject("SpaceInfo");
@@ -129,15 +142,17 @@ public class ParkingPublish extends SlidingFragmentActivity{
 					publish.put("num", Integer.parseInt(num.getText().toString()));
 					publish.put("price", Integer.parseInt(price.getText().toString()));
 					publish.put("fine", Integer.parseInt(fine.getText().toString()));
-					publish.put("start", Integer.parseInt(start.getText().toString()));
-					publish.put("end", Integer.parseInt(end.getText().toString()));
+					publish.put("start", startDate);
+					publish.put("end", endDate);
 					publish.put("state", 0);
-					publish.addAll("shareDate", shareDate);
+					publish.addAllUnique("shareDate", shareDate);
 					publish.saveInBackground(new SaveCallback() {
 						@Override
 						public void done(AVException arg0) {
 							if (arg0 == null) {
 								Toast.makeText(ParkingPublish.this,"发布车位成功", Toast.LENGTH_SHORT).show();
+								ParkingShareDate.setShareDate(null);
+								Community.setIndex(-1);
 								//获取最新已发布车位信息
 								GetPublicSpaceData.getSpaceInfo(OwnerInfo.getId());
 					        } else {
@@ -149,17 +164,99 @@ public class ParkingPublish extends SlidingFragmentActivity{
 				}
 			}
 		});
-		
-		//车位管理
-//		manage.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				GetPublicSpaceData.getSpaceInfo(OwnerInfo.getId());
-//			}
-//		});
-		
 	}
+	
+	/**
+	 * 车位开始时间与结束时间输入框点击监听
+	 */
+	@Override 
+    public boolean onTouch(View v, MotionEvent event) { 
+        if (event.getAction() == MotionEvent.ACTION_DOWN) { 
+   
+            AlertDialog.Builder builder = new AlertDialog.Builder(this); 
+            View view = View.inflate(this, R.layout.activity_timedialog, null); 
+            final TimePicker timePicker = (android.widget.TimePicker) view.findViewById(R.id.time_picker); 
+            builder.setView(view); 
+   
+            Calendar cal = Calendar.getInstance(); 
+            cal.setTimeInMillis(System.currentTimeMillis());  
+   
+            timePicker.setIs24HourView(true); 
+            timePicker.setCurrentHour(cal.get(Calendar.HOUR_OF_DAY)); 
+            timePicker.setCurrentMinute(Calendar.MINUTE); 
+   
+            if (v.getId() == R.id.startTime) { 
+                final int inType = start.getInputType(); 
+                start.setInputType(InputType.TYPE_NULL); 
+                start.onTouchEvent(event); 
+                start.setInputType(inType); 
+                start.setSelection(start.getText().length()); 
+                   
+                builder.setTitle("选取起始时间"); 
+                builder.setPositiveButton("确  定", new DialogInterface.OnClickListener() { 
+   
+                    @Override 
+                    public void onClick(DialogInterface dialog, int which) { 
+   
+                        StringBuffer sb = new StringBuffer(); 
+                        if(timePicker.getCurrentHour() < 10)
+                        	sb.append(0);
+                        sb.append(timePicker.getCurrentHour()).append(":");
+                        if(timePicker.getCurrentMinute() < 10)
+                        	sb.append(0);
+                        sb.append(timePicker.getCurrentMinute()); 
+                        start.setText(sb); 
+                        
+                        Calendar c = Calendar.getInstance();
+                        c.set(0, 0, 0, timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 0);
+                        startDate = c.getTime();
+                        end.requestFocus(); 
+                           
+                        dialog.cancel(); 
+                    } 
+                }); 
+                   
+            } else if (v.getId() == R.id.endTime) { 
+                int inType = end.getInputType(); 
+                end.setInputType(InputType.TYPE_NULL);     
+                end.onTouchEvent(event); 
+                end.setInputType(inType); 
+                end.setSelection(end.getText().length()); 
+   
+                builder.setTitle("选取结束时间"); 
+                builder.setPositiveButton("确  定", new DialogInterface.OnClickListener() { 
+   
+                    @Override 
+                    public void onClick(DialogInterface dialog, int which) { 
+   
+                        StringBuffer sb = new StringBuffer(); 
+//                        sb.append(String.format("%d-%02d-%02d",  
+//                                datePicker.getYear(),  
+//                                datePicker.getMonth() + 1,  
+//                                datePicker.getDayOfMonth())); 
+//                        sb.append("  "); 
+                        if(timePicker.getCurrentHour() < 10)
+                        	sb.append(0);
+                        sb.append(timePicker.getCurrentHour()).append(":");
+                        if(timePicker.getCurrentMinute() < 10)
+                        	sb.append(0);
+                        sb.append(timePicker.getCurrentMinute()); 
+                        end.setText(sb); 
+                        
+                        Calendar c = Calendar.getInstance();
+                        c.set(0, 0, 0, timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 0);
+                        endDate = c.getTime();
+                        dialog.cancel(); 
+                    } 
+                }); 
+            } 
+               
+            Dialog dialog = builder.create(); 
+            dialog.show(); 
+        } 
+   
+        return true; 
+    } 
 	
 	/**
 	 * 初始化滑动菜单
@@ -212,44 +309,27 @@ public class ParkingPublish extends SlidingFragmentActivity{
 	
 	//判断输入数据是否合法
 	private boolean isValid(){
-		if(num.getText().toString().trim().equals("") || Integer.parseInt(num.getText().toString()) == 0)
-		{
+		if(num.getText().toString().trim().equals("") || Integer.parseInt(num.getText().toString()) == 0){
 			num.setError(Html.fromHtml("<font color=#808183>"
                     + "车位号不符合要求"+ "</font>"));
 			return false;
 		}				
-		else if(price.getText().toString().trim().equals("") || Integer.parseInt(price.getText().toString()) <= 0)
-		{
+		else if(price.getText().toString().trim().equals("") || Integer.parseInt(price.getText().toString()) <= 0){
 			price.setError(Html.fromHtml("<font color=#808183>"
                     + "价格不符合要求"+ "</font>"));
 			return false;
 		}
-		else if(fine.getText().toString().trim().equals("") || Integer.parseInt(fine.getText().toString()) <= 0)
-		{
+		else if(fine.getText().toString().trim().equals("") || Integer.parseInt(fine.getText().toString()) <= 0){
 			fine.setError(Html.fromHtml("<font color=#808183>"
                     + "价格不符合要求"+ "</font>"));
 			return false;
 		}
-		else if(start.getText().toString().trim().equals("") || Integer.parseInt(start.getText().toString()) >= 24)
-		{
+		else if(start.getText().toString().compareTo(end.getText().toString()) >= 0){
 			start.setError(Html.fromHtml("<font color=#808183>"
-                    + "开始时间不符合要求"+ "</font>"));
+                    + "结束时间要大于开始时间"+ "</font>"));
 			return false;
 		}
-		else if(end.getText().toString().trim().equals("") || Integer.parseInt(end.getText().toString()) > 24)
-		{
-			end.setError(Html.fromHtml("<font color=#808183>"
-                    + "结束时间不符合要求"+ "</font>"));
-			return false;
-		}
-		else if(Integer.parseInt(start.getText().toString()) >= Integer.parseInt(end.getText().toString()))
-		{
-			start.setError(Html.fromHtml("<font color=#808183>"
-                    + "开始时间不能大于结束时间"+ "</font>"));
-			return false;
-		}
-		else
-		{
+		else{
 			return true;
 		}
 	}

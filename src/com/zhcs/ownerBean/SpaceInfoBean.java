@@ -1,6 +1,8 @@
 package com.zhcs.ownerBean;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,11 +46,11 @@ public class SpaceInfoBean {
 	/**
 	 * 共享开始时间
 	 */
-	private int start;
+	private Date start = new Date();
 	/**
 	 * 共享结束时间
 	 */
-	private int end;
+	private Date end = new Date();
 	/**
 	 * 车位状态：0--开放， 1--预订中， 2--已经进入小区， 3--已经离开小区
 	 */
@@ -56,7 +58,7 @@ public class SpaceInfoBean {
 	/**
 	 * 车位共享日期
 	 */
-	private List<Calendar> shareTime;
+	private List<Calendar> shareTime = new ArrayList<Calendar>();
 	public String getSpaceid() {
 		return spaceid;
 	}
@@ -105,16 +107,16 @@ public class SpaceInfoBean {
 	public void setFine(int fine) {
 		this.fine = fine;
 	}
-	public int getStart() {
+	public Date getStart() {
 		return start;
 	}
-	public void setStart(int start) {
+	public void setStart(Date start) {
 		this.start = start;
 	}
-	public int getEnd() {
+	public Date getEnd() {
 		return end;
 	}
-	public void setEnd(int end) {
+	public void setEnd(Date end) {
 		this.end = end;
 	}
 	public int getState() {

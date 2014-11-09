@@ -4,30 +4,14 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_pubspace"
     android:orientation="vertical" >
-   <!--  <RelativeLayout 
-        android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:orientation="horizontal" >
-    <TextView 
-        android:id="@+id/menu"
-        android:layout_width="30dp"
-        android:layout_height="60dp"
-        android:text="《"
-        android:textColor="#FFF"
-        android:textSize="25sp"
-        android:gravity="center"
-        android:background="#0089d2"/>
-    <TextView 
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:text="车位管理"
-        android:textColor="#FFF"
-        android:textSize="25sp"
-        android:gravity="center"
-        android:background="#0089d2"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/menu"/>
-    </RelativeLayout> -->
+    <Button 
+        android:id="@+id/refresh"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:text="刷新"
+        android:onClick="refreshUI"
+        android:layout_gravity="right">
+    </Button>
     <ListView
         android:id="@+id/listView"
         android:layout_width="fill_parent"

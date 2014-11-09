@@ -1,10 +1,12 @@
 package com.zhcs.ownerBean;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
 
 import com.avos.avoscloud.AVObject;
 import com.zhcs.parkingspaceadmin.SpaceManagement;
@@ -17,6 +19,7 @@ public class OwnerInfo {
 	private static String id;
 	private static String phone;
 	private static ArrayList<SpaceInfoBean> list = new ArrayList<SpaceInfoBean>();
+	private static Handler handler;
 	public static String getId() {
 		return id;
 	}
@@ -37,7 +40,6 @@ public class OwnerInfo {
 	}
 	
 	public static void initializeList(List<AVObject> obj) {
-		// TODO Auto-generated method stub
 		if(!OwnerInfo.list.isEmpty())
 			OwnerInfo.list.clear();
 		for(int i = 0; i < obj.size(); i++){
@@ -50,9 +52,19 @@ public class OwnerInfo {
 			bean.setNum(obj.get(i).getInt("num"));
 			bean.setPrice(obj.get(i).getInt("price"));
 			bean.setFine(obj.get(i).getInt("fine"));
-			bean.setStart(obj.get(i).getInt("start"));
-			bean.setEnd(obj.get(i).getInt("end"));
+			bean.setStart(obj.get(i).getDate("start"));
+			bean.setEnd(obj.get(i).getDate("end"));
 			bean.setState(obj.get(i).getInt("state"));
+			//将下载的long型转为Calendar
+			List<Long> calList = new ArrayList<Long>();
+			calList = obj.get(i).getList("shareDate");
+			List<Calendar> list = new ArrayList<Calendar>();
+			for(long l : calList){
+				Calendar cal = Calendar.getInstance();
+				cal.setTimeInMillis(l);
+				list.add(cal);
+			}
+			bean.setShareTime(list);
 			OwnerInfo.list.add(bean);
 		}
 	}

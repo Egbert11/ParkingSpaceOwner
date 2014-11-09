@@ -1,5 +1,6 @@
 package com.zhcs.parkingspaceadmin;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import android.app.ActionBar;
@@ -18,6 +19,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.CanvasTransformer;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -54,6 +56,10 @@ public class SpaceManagement extends SlidingFragmentActivity{
 		 // 给左上角图标的左边加上一个返回的图标 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
+		//获取最新已发布车位信息
+		GetPublicSpaceData.getSpaceInfo(OwnerInfo.getId());
+		
+		
 		mListView = (ListView)findViewById(R.id.listView);
 		
 		mListView.setAdapter(new SpaceListAdapter());
@@ -68,6 +74,7 @@ public class SpaceManagement extends SlidingFragmentActivity{
 				bun.putInt("index", position);
 				intent.putExtras(bun);
 				startActivity(intent);
+				finish();
 			}
 		});
 	}
@@ -106,8 +113,11 @@ public class SpaceManagement extends SlidingFragmentActivity{
 			//title.setText(String.valueOf(list.get(position).getLat()));
 			int num = position + 1;
 			title.setText("车位" + num);
-			time.setText("时间："+list.get(position).getStart()+":00-"+list.get(position).getEnd()+":00");
-			price.setText("价格："+list.get(position).getPrice()+"元/小时");
+			SimpleDateFormat df=new SimpleDateFormat("HH:mm");
+			String startTime=df.format(list.get(position).getStart());
+			String endTime=df.format(list.get(position).getEnd());
+			time.setText("时间：" + startTime + "--" + endTime);
+			price.setText("价格：" + list.get(position).getPrice() + "元/小时");
 			return convertView;
 		}
 		
@@ -179,6 +189,14 @@ public class SpaceManagement extends SlidingFragmentActivity{
 		super.onRestart();
 	}
 	
+	/**
+	 * 刷新页面
+	 */
+	public void refreshUI(View view){
+		finish();  
+        Intent intent = new Intent(SpaceManagement.this, SpaceManagement.class);  
+        startActivity(intent); 
+	}
 //	@Override
 //	protected void onResume() {
 //		super.onResume();

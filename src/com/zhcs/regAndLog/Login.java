@@ -198,7 +198,7 @@ public class Login extends Activity{
 						OwnerInfo.setId(obj.getObjectId());
 						OwnerInfo.setPhone(phone);	
 						//获取已发布车位信息
-			            GetPublicSpaceData.getSpaceInfo(OwnerInfo.getId());
+			            //GetPublicSpaceData.getSpaceInfo(OwnerInfo.getId());
 			            //登录成功
 						msg.what = 0x00;
 						handler.sendMessage(msg);
@@ -227,6 +227,7 @@ public class Login extends Activity{
 				Toast.makeText(Login.this,"登录成功", Toast.LENGTH_SHORT).show();
 				Intent intent=new Intent(Login.this,SpaceManagement.class);
 				startActivity(intent);
+				finish();
 			}
 			else if(msg.what==0x01){
 				proDialog.dismiss();

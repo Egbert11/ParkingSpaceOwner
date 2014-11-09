@@ -49,8 +49,8 @@ public class ShareDateSelect extends Activity {
 	public void confirmShareDate(View view){
 		//保存共享日期数据
 		ParkingShareDate.setShareDate(shareDate);
-		Intent intent = new Intent(ShareDateSelect.this, ParkingPublish.class);
-		startActivity(intent);
+//		Intent intent = new Intent(ShareDateSelect.this, ParkingPublish.class);
+//		startActivity(intent);
 		finish();
 	}
 }
