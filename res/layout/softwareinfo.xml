@@ -9,6 +9,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:text="     停车易（EasyParking）应用由中山大学研究生团队开发，团队成员有：区俊辉，梁晓东，许圣霖，黄嘉明。此应用基于云服务平台，致力于提高城市车位的利用率，共创智慧城市的美好未来。此应用最终解释权归本团队所有。"
+            android:text="     停车易（EasyParking）应用由中山大学研究生黄嘉明研发。此应用基于云服务平台，致力于提高城市车位的利用率，共创智慧城市的美好未来。此应用最终解释权归本人所有。"
             android:textColor="#FFF"/>
     </LinearLayout>

@@ -35,6 +35,7 @@ public class SampleListFragment extends ListFragment {
 		SampleAdapter adapter = new SampleAdapter(getActivity());
 		adapter.add(new SampleItem("车位管理", R.drawable.menu_ico5));
 		adapter.add(new SampleItem("车位发布", R.drawable.menu_ico6));
+		adapter.add(new SampleItem("历史订单", android.R.drawable.ic_menu_recent_history));
 		adapter.add(new SampleItem("余额查询", R.drawable.menu_money));
 		adapter.add(new SampleItem("服务条款", R.drawable.menu_ico1));
 		adapter.add(new SampleItem("软件信息", R.drawable.menu_ico2));
@@ -53,15 +54,18 @@ public class SampleListFragment extends ListFragment {
 			act = ParkingPublish.class;
 			break;
 		case 2:
-			act = ShowBalance.class;
+			act = HistorySubscribeList.class;
 			break;
 		case 3:
-			act = TermOfServices.class;
+			act = ShowBalance.class;
 			break;
 		case 4:
-			act = SoftwareInformation.class;
+			act = TermOfServices.class;
 			break;
 		case 5:
+			act = SoftwareInformation.class;
+			break;
+		case 6:
 			act = Login.class;
 			break;
 		}
